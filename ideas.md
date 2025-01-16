@@ -12,7 +12,7 @@
 * Even if a model isn’t inherently explainable, techniques like SHAP, LIME, or counterfactual explanations can make them interpretable
 * Gradient Boosting Models (e.g., XGBoost, LightGBM): Can use SHAP values to explain predictions.
 
-- [ ] lembrar de fazer o EDA
+- [x] lembrar de fazer o EDA
 - [ ] Feature Engineering
 - [ ] Cross Validation
 - [ ] Feature Importance
