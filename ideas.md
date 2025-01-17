@@ -4,11 +4,12 @@
    - [ ] Arvore de Decisao
    - [ ] Regressão Logistica
    - [ ] KNN
-   - [ ] Random Forest
-   - [ ] XGBoost
+   - [ ] uplift modeling?
+   - [ ] Random Forest?
+   - [ ] XGBoost?
    - [ ] LightGBM?
    - [ ] SVM?
-   - [ ] TREPAN? DeepRED?
+   - [ ] TREPAN?
 * Even if a model isn’t inherently explainable, techniques like SHAP, LIME, or counterfactual explanations can make them interpretable
 * Gradient Boosting Models (e.g., XGBoost, LightGBM): Can use SHAP values to explain predictions.
 
