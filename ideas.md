@@ -1,14 +1,11 @@
 * usar arvore de decisao e ter uma grande interpretabilidade?
 * Modelos de classificação que posso utilizar:
-   - [ ] Redes Neurais
-   - [ ] Arvore de Decisao
-   - [ ] Regressão Logistica
+   - [x] Arvore de Decisao
+   - [x] LightGBM
+   - [x] Regressão Logistica
    - [ ] KNN
+   - [ ] Redes Neurais
    - [ ] uplift modeling?
-   - [ ] Random Forest?
-   - [ ] XGBoost?
-   - [ ] LightGBM?
-   - [ ] SVM?
    - [ ] TREPAN?
 * Even if a model isn’t inherently explainable, techniques like SHAP, LIME, or counterfactual explanations can make them interpretable
 * Gradient Boosting Models (e.g., XGBoost, LightGBM): Can use SHAP values to explain predictions.
@@ -17,6 +14,7 @@
 - [x] Quais variáveis e/ou suas transformações você utilizou e por quê?
 - [x] Qual tipo de problema estamos resolvendo (regressão, classificação)?
 - [x] Feature Engineering
+- [ ] colocar matriz de confusao e pegar f1 score
 - [ ] Qual modelo melhor se aproxima dos dados e quais seus prós e contras?
 - [ ] Qual medida de performance do modelo foi escolhida e por quê?
 - [ ] Cross Validation
