@@ -24,4 +24,5 @@
 - [ ] lembrar de fazer o pipeline a partir de qualquer arquivo CSV com mesma estrutura de dados
 - [ ] levar valor de negocios para o modelo
 - [ ] colocar algumas fontes tipo que explique o OHE e talvez para cada modelo e scaling ou tecnica que for usar
+- [ ] revisar ingles
 
