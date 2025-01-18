@@ -3,9 +3,9 @@
    - [x] Arvore de Decisao
    - [x] LightGBM
    - [x] Regressão Logistica
-   - [ ] KNN
-   - [ ] Redes Neurais
+   - [x] KNN
    - [ ] uplift modeling?
+   - [ ] Redes Neurais
    - [ ] TREPAN?
 * Even if a model isn’t inherently explainable, techniques like SHAP, LIME, or counterfactual explanations can make them interpretable
 * Gradient Boosting Models (e.g., XGBoost, LightGBM): Can use SHAP values to explain predictions.
