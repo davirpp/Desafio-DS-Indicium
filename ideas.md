@@ -26,4 +26,6 @@
 - [ ] fazer um readme top
 - [ ] mudar os tipos de dados para economizar memoria?
 - [ ] limpar importações
+- [ ] revisar eda
+- [ ] revisar nmotebook predict
 
