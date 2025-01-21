@@ -1,7 +1,8 @@
+import csv
+import joblib
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
-import joblib
 import sys
 
 class DataTransformer(BaseEstimator, TransformerMixin):
@@ -35,9 +36,20 @@ def create_pipeline():
     
     return pipeline
 
+def read_csv_with_unknown_separator(file_path):
+    # Automatically detect the separator
+    with open(file_path, 'r') as file:
+        sample = file.read(1024)  # Read a sample of the file
+        dialect = csv.Sniffer().sniff(sample)
+    
+    # Load the file using the detected separator
+    df = pd.read_csv(file_path, sep=dialect.delimiter)
+    return df
+
+
 def main():
     # Load the data
-    data = pd.read_csv(sys.argv[1], sep=';')
+    data = read_csv_with_unknown_separator(sys.argv[1])
     
     # Create and load the pipeline
     pipeline = create_pipeline()
