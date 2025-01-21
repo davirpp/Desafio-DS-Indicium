@@ -1,30 +1,56 @@
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
 import joblib
 import sys
 
+class DataTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.columns_to_drop = ['CustomerId', 'Surname', 'Exited', 'HasCrCard']
+        self.numeric_columns = ['CreditScore', 'Age', 'Tenure', 'Balance', 
+                              'NumOfProducts', 'EstimatedSalary']
+    
+    def transform(self, X):
+        # Create a copy of the input data
+        X = X.copy()
+        
+        # Drop unnecessary columns
+        X = X.drop(columns=self.columns_to_drop, errors='ignore')
+        
+        # Transform gender
+        X['Male'] = X['Gender'].map({'Male': 1, 'Female': 0})
+        X = X.drop(columns=['Gender'])
+        
+        # Create geography dummies
+        X = pd.get_dummies(X, columns=['Geography'], prefix='Geo', dtype=int)
+        
+        return X
 
-# Load the data
-data = pd.read_csv(sys.argv[1], sep=';')
+def create_pipeline():
+    # Create the pipeline
+    pipeline = Pipeline([
+        ('transformer', DataTransformer()),
+        ('model', joblib.load('scalers_n_models\lightgbm.pkl'))
+    ])
+    
+    return pipeline
 
-# Load scaler and model
-scaler = joblib.load('scalers_n_models/standard_scaler.pkl')
-model = joblib.load('scalers_n_models/lightgbm.pkl')
+def main():
+    # Load the data
+    data = pd.read_csv(sys.argv[1], sep=';')
+    
+    # Create and load the pipeline
+    pipeline = create_pipeline()
+    
+    # Make predictions
+    predictions = pipeline.predict(data.iloc[:, 1:])
+    
+    # Save predictions
+    result_df = pd.DataFrame({
+        'rowNumber': data['RowNumber'],
+        'predictedValues': predictions
+    })
+    result_df.to_csv('prediction.csv', index=False)
 
-columns_to_drop = ['CustomerId', 'Surname', 'Exited', 'HasCrCard']
-numeric_columns = ['CreditScore', 'Age', 'Tenure', 'Balance', 
-                   'NumOfProducts', 'EstimatedSalary']
-
-data = data.drop(columns=columns_to_drop, errors='ignore')
-
-data['Male'] = data['Gender'].map({'Male': 1, 'Female': 0})
-data.drop(columns=['Gender'], inplace=True)
-data = pd.get_dummies(data, columns=['Geography'], prefix='Geo', dtype=int)
-
-data_scaled = data.copy()
-data_scaled[numeric_columns] = scaler.transform(data[numeric_columns])
-
-predictions = model.predict(data_scaled.iloc[:, 1:])
-
-result_df = pd.DataFrame({'rowNumber': data['RowNumber'], 'predictedValues': predictions})
-result_df.to_csv('prediction.csv', index=False)
-
+if __name__ == "__main__":
+    main()
